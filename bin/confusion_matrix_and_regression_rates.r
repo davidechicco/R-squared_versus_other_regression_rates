@@ -44,19 +44,24 @@ regression_rates <- function(actual_labels, predicted_values, keyword)
     thisR2score <- MLmetrics::R2_Score(predicted_values, actual_labels) # (predicted_values, actual_labels) # notice the swap
     # R2_Score(y_pred, y_true)
 
-    cat("  @@@ regression :: \t R^2 \t RMSE \t MAE \t MSE  \t SMAPE \t MAPE \n")
-    cat("  @@@ regression ::   ", dec_three(thisR2score), "\t" , dec_three(thisRMSE), " \t ", dec_three(thisMAE), " \t ", dec_three(thisMSE),  " \t ", dec_three(thisSMAPE),  " \t ", dec_three(thisMAPE)," \n", sep="")
-    cat("  @@@ regression ::  (-∞, +1]  [0, +∞)  [0, +∞) [0, +∞)  [0, 2]  [0, +∞) \n")
+    # cat("  @@@ regression :: \t R^2 \t SMAPE \t RMSE \t MAE \t MSE  \t MAPE \n")
+   # cat("  @@@ regression ::   ", dec_three(thisR2score), "\t" , dec_three(thisSMAPE),  " \t ", dec_three(thisRMSE), " \t ", dec_three(thisMAE), " \t ", dec_three(thisMSE),  " \t ", dec_three(thisMAPE)," \n", sep="")
+  #  cat("  @@@ regression ::  (-∞, +1]  [0, 2]  [0, +∞) [0, +∞)  [0, +∞)  [0, +∞) \n")
+    
+    cnSMAPE <- 1 -  (thisSMAPE / 2 )
+    delta_cnSMAPE_Rsquared <- abs(cnSMAPE - thisR2score)
+    
+    cat((thisR2score), " \t\t " , (cnSMAPE), " \t\t ", delta_cnSMAPE_Rsquared,  " \t\t ", thisSMAPE,  " \n", sep="")
     
     NUM_METRICS <- 6
     outputDataframe <- matrix(ncol=NUM_METRICS, nrow=1)
     outputDataframe[,1] <- thisR2score
-    outputDataframe[,2] <- thisRMSE
-    outputDataframe[,3] <- thisMAE
-    outputDataframe[,4] <- thisMSE
-    outputDataframe[,5] <- thisSMAPE
+    outputDataframe[,2] <- thisSMAPE
+    outputDataframe[,3] <- thisRMSE
+    outputDataframe[,4] <- thisMAE
+    outputDataframe[,5] <- thisMSE
     outputDataframe[,6] <- thisMAPE
-    colnames(outputDataframe) <- c("R^2", "RMSE", "MAE", "MSE", "SMAPE", "MAPE")
+    colnames(outputDataframe) <- c("R^2",  "SMAPE", "RMSE", "MAE", "MSE", "MAPE")
 
     return(outputDataframe)
 }
