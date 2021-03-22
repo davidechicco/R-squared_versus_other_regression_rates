@@ -1,4 +1,4 @@
-# R-squared_versus_other_regression_rates
+# R-squared versus other regression rates
 
 To run our code and generate the examples:
 
