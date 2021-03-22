@@ -12,7 +12,7 @@ libraries(new.packages)
 source("utils.r")
 
 
-# Brier score
+# Cohen's kappa
 Cohen_Kappa_function <- function(actual_labels, predicted_values) 
 {
     ground_and_pred <- data.frame(actual_labels = as.numeric(actual_labels), predicted_values = as.numeric(predicted_values))
@@ -44,9 +44,9 @@ regression_rates <- function(actual_labels, predicted_values, keyword)
     thisR2score <- MLmetrics::R2_Score(predicted_values, actual_labels) # (predicted_values, actual_labels) # notice the swap
     # R2_Score(y_pred, y_true)
 
-    # cat("  @@@ regression :: \t R^2 \t SMAPE \t RMSE \t MAE \t MSE  \t MAPE \n")
-   # cat("  @@@ regression ::   ", dec_three(thisR2score), "\t" , dec_three(thisSMAPE),  " \t ", dec_three(thisRMSE), " \t ", dec_three(thisMAE), " \t ", dec_three(thisMSE),  " \t ", dec_three(thisMAPE)," \n", sep="")
-  #  cat("  @@@ regression ::  (-∞, +1]  [0, 2]  [0, +∞) [0, +∞)  [0, +∞)  [0, +∞) \n")
+     cat("  @@@ regression :: \t R^2 \t SMAPE \t RMSE \t MAE \t MSE  \t MAPE \n")
+    cat("  @@@ regression ::   ", dec_three(thisR2score), "\t" , dec_three(thisSMAPE),  " \t ", dec_three(thisRMSE), " \t ", dec_three(thisMAE), " \t ", dec_three(thisMSE),  " \t ", dec_three(thisMAPE)," \n", sep="")
+    cat("  @@@ regression ::  (-∞, +1]  [0, 2]  [0, +∞) [0, +∞)  [0, +∞)  [0, +∞) \n")
     
     cnSMAPE <- 1 -  (thisSMAPE / 2 )
     delta_cnSMAPE_Rsquared <- abs(cnSMAPE - thisR2score)

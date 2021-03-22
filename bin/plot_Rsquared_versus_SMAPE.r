@@ -20,5 +20,5 @@ rownames(datafile) <- datafile$"ID"
 
 p <- ggplot(datafile, aes(x=nonNegRsquared, y=cnSMAPE)) + xlim(0,1) + ylim(0,1) + geom_point() + geom_smooth()
 p
-ggsave("../results/example.pdf")
+ggsave("../results/example01.png", family="DejaVu Sans")
 dev.off()
